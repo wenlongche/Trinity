@@ -1836,14 +1836,14 @@ function! s:CreateTreeWin()
     let splitLocation = (g:NERDTreeWinPos == "top" || g:NERDTreeWinPos == "left") ? "topleft " : "botright "
     let splitMode = s:ShouldSplitVertically() ? "vertical " : ""
     let splitSize = g:NERDTreeWinSize
-" CHE Wenlong delete for trinity.vim
+" Wenlong Che delete for trinity.vim
 " Begin
     " let t:NERDTreeWinName = localtime() . s:NERDTreeWinName
 " End
-" CHE Wenlong add for trinity.vim
+" Wenlong Che add for trinity.vim
 " Begin
     let t:NERDTreeWinName = s:NERDTreeWinName
-" End    
+" End
     let cmd = splitLocation . splitMode . splitSize . ' new ' . t:NERDTreeWinName
     silent! execute cmd
 
@@ -2332,22 +2332,22 @@ function! s:OpenFileNode(treenode)
     if winnr != -1
         exec winnr . "wincmd w"
 
-" CHE Wenlong delete for trinity.vim
+" Wenlong Che delete for trinity.vim
 " Begin
 "    elseif s:ShouldSplitToOpen(winnr("#"))
 "        call s:OpenFileNodeSplit(a:treenode)
 " End
     else
-" CHE Wenlong add for trinity.vim
+" Wenlong Che add for trinity.vim
 " Begin
-        let l:rtn = s:GetEditWinNR()
+        let l:rtn = s:GetEditWin()
         if l:rtn < 0
             return
         endif
         silent! exe l:rtn . "wincmd w"
 " End
         try
-" CHE Wenlong delete for trinity.vim
+" Wenlong Che delete for trinity.vim
 " Begin
             " wincmd p
 " End
@@ -2889,7 +2889,7 @@ endfunction
 "FUNCTION: s:BindMappings() {{{2
 function! s:BindMappings()
     " set up mappings and commands for this buffer
-" CHE Wenlong delete for trinity.vim
+" Wenlong Che delete for trinity.vim
 " Begin
     " nnoremap <silent> <buffer> <middlerelease> :call <SID>HandleMiddleMouse()<cr>
 " End
@@ -3578,34 +3578,55 @@ function! s:UpDir(keepState)
     endif
 endfunction
 
-" CHE Wenlong add for trinity.vim
+" Wenlong Che add for trinity.vim
 " Begin
-function! s:GetEditWinNR()
+let s:Trinity_pluginList = [
+    \ "__Tag_List__",
+    \ "_NERD_tree_",
+    \ "Source_Explorer"
+\ ]
+
+function! s:GetEditWin()
+
     let l:i = 1
     let l:j = 1
+
+    let l:srcexplWin = 0
     let l:pluginList = [
-            \ "__Tag_List__", 
-	    \ "_NERD_tree_", 
-	    \ "Source_Explorer"
-        \]
-    while 1
-        for item in l:pluginList
-	    if bufname(winbufnr(l:i)) ==# item || getwinvar(l:i, '&previewwindow')
-		break
-	    else
-		let l:j += 1
-	    endif
-	endfor
-	if j >= len(l:pluginList)
-            return l:i
-	else
-	    let l:i += 1
-            let l:j = 0
-	endif
-        if l:i > winnr("$")
-	    return -1
-	endif
-	endwhile
+        \ "__Tag_List__",
+        \ "_NERD_tree_",
+        \ "Source_Explorer"
+    \ ]
+
+    try
+        let l:srcexplWin = g:SrcExpl_GetWin()
+    catch
+    finally
+        while 1
+            " compatible for Named Buffer Version and Preview Window Version
+            for item in l:pluginList
+                if (bufname(winbufnr(l:i)) ==# item)
+                \ || (l:srcexplWin == 0 && getwinvar(l:i, '&previewwindow'))
+                \ || (l:srcexplWin == l:i)
+                    break
+                else
+                    let l:j += 1
+                endif
+            endfor
+
+            if l:j >= len(l:pluginList)
+                return l:i
+            else
+                let l:i += 1
+                let l:j = 0
+            endif
+
+            if l:i > winnr("$")
+                return -1
+            endif
+        endwhile
+    endtry
+
 endfunction
 " End
 
