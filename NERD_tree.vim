@@ -3580,12 +3580,6 @@ endfunction
 
 " Wenlong Che add for trinity.vim
 " Begin
-let s:Trinity_pluginList = [
-    \ "__Tag_List__",
-    \ "_NERD_tree_",
-    \ "Source_Explorer"
-\ ]
-
 function! s:GetEditWin()
 
     let l:i = 1
