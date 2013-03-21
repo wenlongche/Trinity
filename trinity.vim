@@ -7,8 +7,8 @@
 " Authors:     Wenlong Che <wenlong.che@gmail.com>                             "
 " Homepage:    http://www.vim.org/scripts/script.php?script_id=2347            "
 " GitHub:      https://github.com/wesleyche/Trinity                            "
-" Version:     2.0                                                             "
-" Last Change: September 16th, 2012                                            "
+" Version:     2.1                                                             "
+" Last Change: March 21th, 2013                                                "
 " Licence:     This program is free software; you can redistribute it and / or "
 "              modify it under the terms of the GNU General Public License as  "
 "              published by the Free Software Foundation; either version 2, or "
@@ -123,7 +123,11 @@ endfunction " }}}
 function! <SID>Trinity_InitSourceExplorer()
 
     " // Set the height of Source Explorer window                                  "
-    let g:SrcExpl_winHeight = 8
+    if has("unix")
+        let g:SrcExpl_winHeight = 13
+    else
+        let g:SrcExpl_winHeight = 8
+    endif
     " // Set 1 ms for refreshing the Source Explorer                               "
     let g:SrcExpl_refreshTime = 1
     " // Set "Enter" key to jump into the exact definition context                 "
@@ -146,9 +150,13 @@ function! <SID>Trinity_InitSourceExplorer()
     let g:SrcExpl_isUpdateTags = 0
     " // Use program 'ctags' with argument '--sort=foldcase -R' to create or       "
     " // update a tags file                                                        "
-    let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
-    " // Set "<F10>" key for updating the tags file artificially                   "
-    let g:SrcExpl_updateTagsKey = "<F10>"
+    " let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
+    " // Set "<F12>" key for updating the tags file artificially                   "
+    " let g:SrcExpl_updateTagsKey = "<F12>"
+    " // Set "<F3>" key for displaying the previous definition in the jump list    "
+    let g:SrcExpl_prevDefKey = "<F3>"
+    " // Set "<F4>" key for displaying the next definition in the jump list        "
+    let g:SrcExpl_nextDefKey = "<F4>"
 
 endfunction " }}}
 

@@ -56,3 +56,6 @@ Changelog
 =========
 2.0
 - Support the Named Buffer Version of Source Explorer (v5.1 and above).
+
+2.1
+- Add the default keys for Source Explorer's fast way to multi-defs jumping.
