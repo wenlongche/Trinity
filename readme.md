@@ -54,8 +54,8 @@ nmap <F11> :TrinityToggleNERDTree<CR>
 
 Changelog
 =========
+2.1
+- Add the default keys for supporting Source Explorer v5.2 fast way of multi-defs jumping.
+
 2.0
 - Support the Named Buffer Version of Source Explorer (v5.1 and above).
-
-2.1
-- Add the default keys for Source Explorer's fast way to multi-defs jumping.
