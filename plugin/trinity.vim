@@ -98,7 +98,7 @@ let s:source_explorer_title  = "Source_Explorer"
 function! <SID>Trinity_InitTagList()
 
     " Split to the right side of the screen
-    let g:Tlist_Use_Left_Window = 1
+    let g:Tlist_Use_Right_Window = 1
     " Set the window width
     let g:Tlist_WinWidth = 40
     " Sort by the order
@@ -169,7 +169,7 @@ function! <SID>Trinity_InitNERDTree()
     " Set the window width
     let g:NERDTreeWinSize = 23
     " Set the window position
-    let g:NERDTreeWinPos = "right"
+    let g:NERDTreeWinPos = "left"
     " Auto centre
     let g:NERDTreeAutoCenter = 0
     " Not Highlight the cursor line
