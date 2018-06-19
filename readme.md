@@ -1,19 +1,19 @@
 **Trinity**
 ===========
 
-The Trinity plugin manages Source Explorer, Taglist and NERD Tree, and build them as a great IDE which works like the "Source Insignt".
+The Trinity plugin manages Source Explorer, Taglist and NERD Tree, and build them as a great IDE.
 
 Features
 ========
 
 * Automatic Display of Declarations in the Context Window on the bottom in the (G)VIM window using the Source Explorer: 
-http://www.vim.org/scripts/script.php?script_id=2179 
+https://www.vim.org/scripts/script.php?script_id=2179 
 
 * Symbol Windows For Each File on the left in the (G)VIM window (G)VIM using the Taglist: 
-http://www.vim.org/scripts/script.php?script_id=273 
+https://www.vim.org/scripts/script.php?script_id=273 
 
 * Quick Access to All Files on the right in the (G)VIM window using the NERD Tree: 
-http://www.vim.org/scripts/script.php?script_id=1658 
+https://www.vim.org/scripts/script.php?script_id=1658 
 
 Installation
 ============
@@ -55,6 +55,9 @@ nmap <F11> :TrinityToggleNERDTree<CR>
 Changelog
 =========
 ```vim
+2.2
+- Add the configurations for supporting Source Explorer v6.0.
+
 2.1
 - Add the default keys for supporting Source Explorer v5.2 fast way of multi-defs jumping.
 

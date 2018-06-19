@@ -3,12 +3,12 @@
 "                                                                              "
 " File Name:   Trinity                                                         "
 " Abstract:    A (G)Vim plugin for building 'Source Explorer', 'Taglist' and   "
-"              'NERD tree' into an IDE which works like the "Source Insignt".  "
+"              'NERD tree' into an IDE.                                        "
 " Authors:     Wenlong Che <wenlong.che@gmail.com>                             "
-" Homepage:    http://www.vim.org/scripts/script.php?script_id=2347            "
-" GitHub:      https://github.com/wesleyche/Trinity                            "
-" Version:     2.1                                                             "
-" Last Change: March 21th, 2013                                                "
+" Homepage:    https://www.vim.org/scripts/script.php?script_id=2347           "
+" GitHub:      https://www.github.com/wesleyche/Trinity                        "
+" Version:     2.2                                                             "
+" Last Change: June 18th, 2018                                                 "
 " Licence:     This program is free software; you can redistribute it and / or "
 "              modify it under the terms of the GNU General Public License as  "
 "              published by the Free Software Foundation; either version 2, or "
@@ -124,7 +124,11 @@ function! <SID>Trinity_InitSourceExplorer()
 
     " // Set the height of Source Explorer window                                  "
     if has("unix")
-        let g:SrcExpl_winHeight = 13
+        if has('gui_running')
+            let g:SrcExpl_winHeight = 10
+        else
+            let g:SrcExpl_winHeight = 11
+        endif
     else
         let g:SrcExpl_winHeight = 8
     endif
@@ -142,10 +146,24 @@ function! <SID>Trinity_InitSourceExplorer()
         \ s:nerd_tree_title,
         \ s:source_explorer_title
     \ ]
+    " // The color schemes used by Source Explorer. There are five color schemes   "
+    " // supported for now - Red, Cyan, Green, Yellow and Magenta. Source Explorer "
+    " // will pick up one of them randomly when initialization.                    "
+     let g:SrcExpl_colorSchemeList = [
+             \ "Red",
+             \ "Cyan",
+             \ "Green",
+             \ "Yellow",
+             \ "Magenta"
+     \ ]
     " // Enable/Disable the local definition searching, and note that this is not  "
     " // guaranteed to work, the Source Explorer doesn't check the syntax for now. "
     " // It only searches for a match with the keyword according to command 'gd'   "
     let g:SrcExpl_searchLocalDef = 1
+    " // Workaround for Vim bug @https://goo.gl/TLPK4K as any plugins using        "
+    " // autocmd for BufReadPre might have conflicts with Source Explorer. e.g.    "
+    " // YCM, Syntastic etc.                                                       "
+    let g:SrcExpl_nestedAutoCmd = 1
     " // Do not let the Source Explorer update the tags file when opening          "
     let g:SrcExpl_isUpdateTags = 0
     " // Use program 'ctags' with argument '--sort=foldcase -R' to create or       "
